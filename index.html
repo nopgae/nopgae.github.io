@@ -113,7 +113,7 @@
     color: var(--heading);
     font-weight: 500;
   }
-  .hero .role span { color: var(--accent); }
+  .hero .role .sep { color: var(--accent); }
   .hero .tagline { max-width: 36rem; margin: 1rem 0 0; font-size: 1.02rem; }
   .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
 
@@ -283,7 +283,10 @@
     padding: 0.25rem 0.6rem; cursor: pointer;
   }
   .lang button[aria-pressed="true"] { color: var(--bg); background: var(--accent); }
-  html[lang="ko"] body { word-break: keep-all; }
+  .i18n { display: inline-grid; }
+  .i18n > span { grid-area: 1 / 1; }
+  .i18n > [lang="ko"] { word-break: keep-all; }
+  html[lang="ko"] .i18n > [lang="en"], html:not([lang="ko"]) .i18n > [lang="ko"] { visibility: hidden; }
 </style>
 </head>
 <body>
@@ -307,7 +310,7 @@
   <div class="hero" id="top">
     <span class="status" data-ko="서울 · 구직 중">Seoul · open to opportunities</span>
     <h1 data-ko="최종인">Jongin Choi</h1>
-    <p class="role" data-ko="데이터 사이언티스트 &lt;span&gt;/&lt;/span&gt; ML · 자동화">Data Scientist <span>/</span> ML &amp; Automation</p>
+    <p class="role" data-ko="데이터 사이언티스트 &lt;span class=&quot;sep&quot;&gt;/&lt;/span&gt; ML · 자동화">Data Scientist <span class="sep">/</span> ML &amp; Automation</p>
     <p class="tagline" data-ko="지저분한 실제 데이터를 의사결정으로 바꾸는 ML 파이프라인과 작은 도구를 만듭니다. 특히 물류·운영 분야에 관심이 있습니다.">I build ML pipelines and small tools that turn messy real-world data into decisions — with a focus on logistics and operations.</p>
     <div class="actions">
       <a class="btn primary" href="JonginChoi_Resume.pdf" data-href-ko="JonginChoi_Resume_KO.pdf" target="_blank" rel="noreferrer">
@@ -514,12 +517,27 @@
     en: { title: "Jongin Choi — Data Scientist", desc: "Jongin Choi — data scientist in Seoul. ML, NLP, and automation projects." },
     ko: { title: "최종인 — 데이터 사이언티스트", desc: "서울의 데이터 사이언티스트 최종인. ML, NLP, 자동화 프로젝트." },
   };
+  // Both languages sit stacked in one grid cell and only visibility flips,
+  // so every box keeps the size of its longer version and nothing shifts.
+  document.querySelectorAll("[data-ko]").forEach((el) => {
+    const wrap = document.createElement("span");
+    wrap.className = "i18n";
+    const en = document.createElement("span");
+    en.lang = "en";
+    en.innerHTML = el.innerHTML;
+    const ko = document.createElement("span");
+    ko.lang = "ko";
+    ko.innerHTML = el.dataset.ko;
+    wrap.append(en, ko);
+    // Icons such as the tile arrow stay outside the text so they never move
+    const arrow = en.querySelector(":scope > .arrow");
+    ko.querySelector(":scope > .arrow")?.remove();
+    arrow?.remove();
+    el.replaceChildren(wrap);
+    if (arrow) el.append(arrow);
+  });
   const setLang = (lang) => {
     document.documentElement.lang = lang;
-    document.querySelectorAll("[data-ko]").forEach((el) => {
-      if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
-      el.innerHTML = lang === "ko" ? el.dataset.ko : el.dataset.en;
-    });
     document.querySelectorAll("[data-href-ko]").forEach((a) => {
       if (a.dataset.hrefEn === undefined) a.dataset.hrefEn = a.getAttribute("href");
       a.setAttribute("href", lang === "ko" ? a.dataset.hrefKo : a.dataset.hrefEn);
