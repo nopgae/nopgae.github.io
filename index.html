@@ -280,6 +280,7 @@
   .lang {
     position: relative; display: inline-grid; grid-template-columns: 1fr 1fr;
     border: 1px solid var(--border); border-radius: 999px; padding: 2px; background: var(--tile);
+    cursor: pointer;
   }
   .lang::before {
     content: ""; position: absolute; top: 2px; bottom: 2px; left: 2px; width: calc(50% - 2px);
@@ -585,14 +586,14 @@
     try { localStorage.setItem("lang", lang); } catch {}
   };
   const toggle = document.querySelector(".lang");
-  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => {
-    if (b.dataset.lang === document.documentElement.lang) return;
+  // A click anywhere on the toggle (either half, or its edge) switches to the other language
+  toggle.addEventListener("click", () => {
     // Restart the pill's squish even on quick repeat clicks
     toggle.classList.remove("bump");
     void toggle.offsetWidth;
     toggle.classList.add("bump");
-    setLang(b.dataset.lang);
-  }));
+    setLang(document.documentElement.lang === "ko" ? "en" : "ko");
+  });
   toggle.addEventListener("animationend", () => toggle.classList.remove("bump"));
   let saved = null;
   try { saved = localStorage.getItem("lang"); } catch {}
