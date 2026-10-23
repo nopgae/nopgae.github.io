@@ -7,7 +7,7 @@
 <meta name="description" content="Jongin Choi — data scientist in Seoul. ML, NLP, and automation projects."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
     color-scheme: dark;
@@ -28,7 +28,7 @@
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: Geist, "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: var(--bg);
     color: var(--muted);
     line-height: 1.6;
@@ -275,34 +275,44 @@
     * { transition: none !important; }
     a.tile:hover { transform: none; }
   }
+
+  .lang { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; padding: 2px; background: var(--tile); }
+  .lang button {
+    font: inherit; font-family: var(--mono); font-size: 0.75rem;
+    color: var(--muted); background: none; border: 0; border-radius: 999px;
+    padding: 0.25rem 0.6rem; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { color: var(--bg); background: var(--accent); }
+  html[lang="ko"] body { word-break: keep-all; }
 </style>
 </head>
 <body>
-<a class="skip" href="#content">Skip to content</a>
+<a class="skip" href="#content" data-ko="본문으로 건너뛰기">Skip to content</a>
 
 <header class="topbar">
   <div class="container">
     <a class="mono-logo" href="#top" aria-label="Jongin Choi — home">JC</a>
     <nav aria-label="Primary">
-      <a class="link" href="#about">About</a>
-      <a class="link" href="#work">Work</a>
-      <a class="link" href="#shipped">Shipped</a>
-      <a class="link" href="#archive">Archive</a>
-      <a class="btn sm primary" href="JonginChoi_Resume.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
+      <a class="link" href="#about" data-ko="소개">About</a>
+      <a class="link" href="#work" data-ko="연구·ML">Work</a>
+      <a class="link" href="#shipped" data-ko="만든 것">Shipped</a>
+      <a class="link" href="#archive" data-ko="아카이브">Archive</a>
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="ko" aria-pressed="false">한</button><button type="button" data-lang="en" aria-pressed="true">EN</button></div>
+      <a class="btn sm primary" href="JonginChoi_Resume.pdf" data-href-ko="JonginChoi_Resume_KO.pdf" target="_blank" rel="noreferrer" data-ko="이력서 ↗">Resume ↗</a>
     </nav>
   </div>
 </header>
 
 <main id="content" class="container">
   <div class="hero" id="top">
-    <span class="status">Seoul · open to opportunities</span>
-    <h1>Jongin Choi</h1>
-    <p class="role">Data Scientist <span>/</span> ML &amp; Automation</p>
-    <p class="tagline">I build ML pipelines and small tools that turn messy real-world data into decisions — with a focus on logistics and operations.</p>
+    <span class="status" data-ko="서울 · 구직 중">Seoul · open to opportunities</span>
+    <h1 data-ko="최종인">Jongin Choi</h1>
+    <p class="role" data-ko="데이터 사이언티스트 &lt;span&gt;/&lt;/span&gt; ML · 자동화">Data Scientist <span>/</span> ML &amp; Automation</p>
+    <p class="tagline" data-ko="지저분한 실제 데이터를 의사결정으로 바꾸는 ML 파이프라인과 작은 도구를 만듭니다. 특히 물류·운영 분야에 관심이 있습니다.">I build ML pipelines and small tools that turn messy real-world data into decisions — with a focus on logistics and operations.</p>
     <div class="actions">
-      <a class="btn primary" href="JonginChoi_Resume.pdf" target="_blank" rel="noreferrer">
+      <a class="btn primary" href="JonginChoi_Resume.pdf" data-href-ko="JonginChoi_Resume_KO.pdf" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
-        Resume
+        <span data-ko="이력서">Resume</span>
       </a>
       <a class="btn" href="mailto:jic.jonginchoi@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
@@ -322,46 +332,46 @@
   </div>
 
   <section id="about" aria-labelledby="about-h">
-    <div class="section-head"><h2 id="about-h">About</h2><span class="idx">01</span></div>
+    <div class="section-head"><h2 id="about-h" data-ko="소개">About</h2><span class="idx">01</span></div>
     <div class="bento">
       <div class="tile span-4 about">
-        <span class="kicker">Who I am</span>
-        <p style="margin-top:0.75rem">I'm a data scientist based in <strong>Seoul</strong>, back in Korea after 13 years in the US. I studied <strong>Applied Data Science at Penn State</strong> (B.S., 2025), where I worked as a research assistant on a large-scale multimodal emotion dataset.</p>
-        <p>Most of my work sits between modeling and engineering: scraping and cleaning data, training and honestly evaluating models, then wrapping the result in something people can use — an API, a dashboard, or a small app. I'm especially interested in ML and automation for <strong>logistics and operations</strong>.</p>
-        <p>Fully bilingual in <strong>Korean and English</strong> (TOEIC Speaking 160, AL).</p>
+        <span class="kicker" data-ko="저는">Who I am</span>
+        <p style="margin-top:0.75rem" data-ko="미국에서 13년을 지내고 돌아와 &lt;strong&gt;서울&lt;/strong&gt;에서 일하는 데이터 사이언티스트입니다. &lt;strong&gt;Penn State에서 응용데이터과학&lt;/strong&gt;을 전공했고(2025년 학사), 재학 중 대규모 멀티모달 감정 데이터셋 연구의 연구보조원으로 일했습니다.">I'm a data scientist based in <strong>Seoul</strong>, back in Korea after 13 years in the US. I studied <strong>Applied Data Science at Penn State</strong> (B.S., 2025), where I worked as a research assistant on a large-scale multimodal emotion dataset.</p>
+        <p data-ko="주로 모델링과 엔지니어링 사이의 일을 합니다. 데이터를 수집·정제하고, 모델을 학습시켜 정직하게 평가한 뒤, API·대시보드·작은 앱처럼 사람들이 쓸 수 있는 형태로 만듭니다. 특히 &lt;strong&gt;물류·운영&lt;/strong&gt; 분야의 ML과 자동화에 관심이 많습니다.">Most of my work sits between modeling and engineering: scraping and cleaning data, training and honestly evaluating models, then wrapping the result in something people can use — an API, a dashboard, or a small app. I'm especially interested in ML and automation for <strong>logistics and operations</strong>.</p>
+        <p data-ko="&lt;strong&gt;한국어와 영어&lt;/strong&gt; 모두 원어민 수준입니다 (TOEIC Speaking 160, AL).">Fully bilingual in <strong>Korean and English</strong> (TOEIC Speaking 160, AL).</p>
       </div>
       <div class="tile span-2">
-        <span class="kicker">Stack</span>
+        <span class="kicker" data-ko="기술 스택">Stack</span>
         <dl class="stack">
-          <div><dt>Languages</dt><dd>Python, TypeScript, SQL</dd></div>
+          <div><dt data-ko="언어">Languages</dt><dd>Python, TypeScript, SQL</dd></div>
           <div><dt>ML / NLP</dt><dd>PyTorch, Hugging Face, XGBoost, scikit-learn</dd></div>
-          <div><dt>Data</dt><dd>pandas, SQLite, Plotly, scraping</dd></div>
-          <div><dt>Apps</dt><dd>FastAPI, Flask, React Native, Supabase</dd></div>
+          <div><dt data-ko="데이터">Data</dt><dd>pandas, SQLite, Plotly, scraping</dd></div>
+          <div><dt data-ko="앱">Apps</dt><dd>FastAPI, Flask, React Native, Supabase</dd></div>
         </dl>
       </div>
     </div>
   </section>
 
   <section id="work" aria-labelledby="work-h">
-    <div class="section-head"><h2 id="work-h">Research &amp; ML work</h2><span class="idx">02</span></div>
+    <div class="section-head"><h2 id="work-h" data-ko="연구 · ML">Research &amp; ML work</h2><span class="idx">02</span></div>
     <div class="bento">
       <a class="tile span-4" href="https://github.com/nopgae/feelreel-mini" target="_blank" rel="noreferrer">
-        <span class="kicker">Research Assistant · Penn State · Jun 2024 – Mar 2025</span>
-        <h3>FeelReel — multimodal emotion benchmark <span class="arrow">↗</span></h3>
-        <p>Joined the follow-up phase of FeelReel, a lab dataset project of Reddit images and comments for emotion understanding (an earlier version was submitted to CVPR 2024), in Prof. Sharon Hwang's lab for IST 495 internship credit. My role was on the data side: sourcing and organizing Reddit data through the collection pipeline, and building the MTurk survey page used to collect human evaluations.</p>
+        <span class="kicker" data-ko="연구보조원 · Penn State · 2024.06 ~ 2025.03">Research Assistant · Penn State · Jun 2024 – Mar 2025</span>
+        <h3 data-ko="FeelReel — 멀티모달 감정 벤치마크 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">FeelReel — multimodal emotion benchmark <span class="arrow">↗</span></h3>
+        <p data-ko="Reddit 이미지와 댓글로 감정 이해를 연구하는 연구실 데이터셋 프로젝트 FeelReel의 후속 단계에 합류했습니다(이전 버전은 CVPR 2024에 제출). Prof. Sharon Hwang 연구실이며 IST 495 인턴십 학점과 연계됐습니다. 데이터 쪽을 맡아 수집 파이프라인으로 Reddit 데이터를 모으고 정리했고, 사람 평가 응답을 받는 MTurk 설문 페이지를 만들었습니다.">Joined the follow-up phase of FeelReel, a lab dataset project of Reddit images and comments for emotion understanding (an earlier version was submitted to CVPR 2024), in Prof. Sharon Hwang's lab for IST 495 internship credit. My role was on the data side: sourcing and organizing Reddit data through the collection pipeline, and building the MTurk survey page used to collect human evaluations.</p>
         <div class="spacer"></div>
         <div class="stats">
-          <div><div class="big">400K+</div><div class="lbl">images (project dataset)</div></div>
-          <div><div class="big">5M+</div><div class="lbl">comments (project dataset)</div></div>
+          <div><div class="big">400K+</div><div class="lbl" data-ko="이미지 (프로젝트 전체)">images (project dataset)</div></div>
+          <div><div class="big">5M+</div><div class="lbl" data-ko="댓글 (프로젝트 전체)">comments (project dataset)</div></div>
         </div>
-        <ul class="tags"><li>Reddit API / PRAW</li><li>Data curation</li><li>MTurk</li></ul>
-        <p style="font-size:0.8rem;color:var(--faint);margin-top:1rem">Repo: <span style="color:var(--muted)">feelreel-mini</span> — my own small-scale recreation of the pipeline with public tools. Not the lab's code or data.</p>
+        <ul class="tags"><li>Reddit API / PRAW</li><li data-ko="데이터 정제">Data curation</li><li>MTurk</li></ul>
+        <p style="font-size:0.8rem;color:var(--faint);margin-top:1rem" data-ko="저장소: &lt;span style=&quot;color:var(--muted)&quot;&gt;feelreel-mini&lt;/span&gt; — 공개 도구로 파이프라인을 작게 재현한 개인 프로젝트입니다. 연구실의 코드나 데이터가 아닙니다.">Repo: <span style="color:var(--muted)">feelreel-mini</span> — my own small-scale recreation of the pipeline with public tools. Not the lab's code or data.</p>
       </a>
 
       <a class="tile span-2" href="https://github.com/nopgae/financial-distress-prediction" target="_blank" rel="noreferrer">
-        <span class="kicker">Classification</span>
-        <h3>Financial Distress <span class="arrow">↗</span></h3>
-        <p>Corporate distress from 30+ financial ratios, with SMOTE for class imbalance and stratified 5-fold CV.</p>
+        <span class="kicker" data-ko="분류">Classification</span>
+        <h3 data-ko="기업 부실 예측 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">Financial Distress <span class="arrow">↗</span></h3>
+        <p data-ko="재무비율 30여 개로 기업 부실을 예측합니다. 클래스 불균형은 SMOTE로, 검증은 층화 5-fold 교차검증으로 했습니다.">Corporate distress from 30+ financial ratios, with SMOTE for class imbalance and stratified 5-fold CV.</p>
         <div class="spacer"></div>
         <div class="big">0.885<small>ROC-AUC</small></div>
         <ul class="tags"><li>XGBoost</li><li>SMOTE</li></ul>
@@ -369,107 +379,107 @@
 
       <a class="tile span-2" href="https://github.com/nopgae/reddit-sentiment-roberta" target="_blank" rel="noreferrer">
         <span class="kicker">NLP</span>
-        <h3>Reddit Sentiment <span class="arrow">↗</span></h3>
-        <p>RoBERTa sentiment pipeline over e-commerce, Korean tech, logistics, and supply-chain communities.</p>
+        <h3 data-ko="Reddit 감성 분석 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">Reddit Sentiment <span class="arrow">↗</span></h3>
+        <p data-ko="이커머스·한국 테크·물류·공급망 커뮤니티를 대상으로 한 RoBERTa 감성 분석 파이프라인입니다.">RoBERTa sentiment pipeline over e-commerce, Korean tech, logistics, and supply-chain communities.</p>
         <div class="spacer"></div>
-        <div class="big">563<small>posts · 7 subs</small></div>
+        <div class="big">563<small data-ko="게시물 · 7개 커뮤니티">posts · 7 subs</small></div>
         <ul class="tags"><li>RoBERTa</li><li>Hugging Face</li></ul>
       </a>
 
       <a class="tile span-4" href="https://github.com/nopgae/kospi-stock-prediction" target="_blank" rel="noreferrer">
-        <span class="kicker">Time series · honest eval</span>
-        <h3>KOSPI price direction <span class="arrow">↗</span></h3>
-        <p>Live KRX data, 12 hand-built technical indicators, and a leakage-free chronological split. The model doesn't beat the naive baseline on Samsung Electronics — the write-up explains why that's the expected result in an efficient market.</p>
+        <span class="kicker" data-ko="시계열 · 정직한 평가">Time series · honest eval</span>
+        <h3 data-ko="KOSPI 등락 예측 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">KOSPI price direction <span class="arrow">↗</span></h3>
+        <p data-ko="실시간 KRX 데이터, 직접 만든 기술적 지표 12개, 정보 누수 없는 시간순 분할을 썼습니다. 삼성전자에서 모델은 단순 기준선을 이기지 못했고, 효율적 시장에서는 이것이 예상된 결과인 이유를 정리했습니다.">Live KRX data, 12 hand-built technical indicators, and a leakage-free chronological split. The model doesn't beat the naive baseline on Samsung Electronics — the write-up explains why that's the expected result in an efficient market.</p>
         <div class="spacer"></div>
         <div class="bars" aria-label="Accuracy: model 49.4%, always-up baseline 57.6%">
           <div class="bar model"><span class="name">XGBoost</span><span class="track"><span class="fill" style="display:block;width:49.4%"></span></span><span class="val">49.4%</span></div>
-          <div class="bar"><span class="name">Always up</span><span class="track"><span class="fill" style="display:block;width:57.6%"></span></span><span class="val">57.6%</span></div>
+          <div class="bar"><span class="name" data-ko="항상 상승">Always up</span><span class="track"><span class="fill" style="display:block;width:57.6%"></span></span><span class="val">57.6%</span></div>
         </div>
         <ul class="tags"><li>XGBoost</li><li>yfinance</li><li>Plotly</li></ul>
       </a>
 
       <a class="tile span-6" href="https://github.com/nopgae/nlp-text-embedding-comparison" target="_blank" rel="noreferrer">
-        <span class="kicker">Multimodal</span>
-        <h3>From N-grams to CLIP <span class="arrow">↗</span></h3>
-        <p>Text representations from n-grams through Word2Vec, GloVe, ELMo, and BERT — plus BERT + ResNet-50 multimodal fusion and CLIP zero-shot classification.</p>
+        <span class="kicker" data-ko="멀티모달">Multimodal</span>
+        <h3 data-ko="N-gram에서 CLIP까지 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">From N-grams to CLIP <span class="arrow">↗</span></h3>
+        <p data-ko="n-gram부터 Word2Vec, GloVe, ELMo, BERT까지 텍스트 표현을 비교하고, BERT + ResNet-50 멀티모달 결합과 CLIP 제로샷 분류까지 다뤘습니다.">Text representations from n-grams through Word2Vec, GloVe, ELMo, and BERT — plus BERT + ResNet-50 multimodal fusion and CLIP zero-shot classification.</p>
         <ul class="tags"><li>PyTorch</li><li>BERT</li><li>CLIP</li><li>ResNet-50</li></ul>
       </a>
 
       <div class="tile span-3">
-        <span class="kicker">Coursework · DS 310 · Fall 2024</span>
-        <h3>Medical Transcription Classifier</h3>
-        <p>Six-specialty classifier on TF-IDF (1–3 grams) plus length features. Tuned XGBoost over 54 configs × 5-fold CV (270 fits), and untuned logistic regression still won (F1 0.763 vs 0.711) because of sparse features.</p>
+        <span class="kicker" data-ko="수업 프로젝트 · DS 310 · 2024 가을">Coursework · DS 310 · Fall 2024</span>
+        <h3 data-ko="의료 진료기록 분류 모델">Medical Transcription Classifier</h3>
+        <p data-ko="TF-IDF(1~3그램)와 문서 길이 변수로 진료기록을 6개 진료과로 분류했습니다. XGBoost를 54개 조합 × 5-fold(270회)로 튜닝했지만, 희소 피처 때문에 튜닝하지 않은 로지스틱 회귀가 더 높았습니다(F1 0.763 vs 0.711).">Six-specialty classifier on TF-IDF (1–3 grams) plus length features. Tuned XGBoost over 54 configs × 5-fold CV (270 fits), and untuned logistic regression still won (F1 0.763 vs 0.711) because of sparse features.</p>
         <div class="spacer"></div>
         <div class="big">0.807<small>weighted F1</small></div>
         <ul class="tags"><li>scikit-learn</li><li>XGBoost</li><li>TF-IDF</li></ul>
       </div>
 
       <div class="tile span-3">
-        <span class="kicker">Coursework · Jan – May 2025</span>
-        <h3>Cobot Performance</h3>
-        <p>Integration lead: learned the robot's language and tablet software to turn teammates' choreography into cobot motion, and coordinated a multinational team in Korean and English.</p>
+        <span class="kicker" data-ko="수업 프로젝트 · 2025.01 ~ 2025.05">Coursework · Jan – May 2025</span>
+        <h3 data-ko="협동로봇 퍼포먼스">Cobot Performance</h3>
+        <p data-ko="통합 담당: 로봇 전용 언어와 태블릿 SW를 익혀 팀원들의 안무를 협동로봇 동작으로 구현했고, 다국적 팀을 한국어·영어로 조율했습니다.">Integration lead: learned the robot's language and tablet software to turn teammates' choreography into cobot motion, and coordinated a multinational team in Korean and English.</p>
         <div class="spacer"></div>
-        <div class="big">2nd<small>in class</small></div>
-        <ul class="tags"><li>Robotics</li><li>Team lead</li></ul>
+        <div class="big" data-ko="2위&lt;small&gt;수업 내&lt;/small&gt;">2nd<small>in class</small></div>
+        <ul class="tags"><li data-ko="로보틱스">Robotics</li><li data-ko="팀 리드">Team lead</li></ul>
       </div>
     </div>
   </section>
 
   <section id="shipped" aria-labelledby="shipped-h">
-    <div class="section-head"><h2 id="shipped-h">Built &amp; shipped</h2><span class="idx">03</span></div>
+    <div class="section-head"><h2 id="shipped-h" data-ko="만들어서 공개한 것">Built &amp; shipped</h2><span class="idx">03</span></div>
     <div class="bento">
       <a class="tile span-3" href="https://price-tracker-theta-umber.vercel.app" target="_blank" rel="noreferrer">
-        <span class="kicker">Web app <span class="live">● LIVE</span></span>
+        <span class="kicker" data-ko="웹 앱 &lt;span class=&quot;live&quot;&gt;● 운영 중&lt;/span&gt;">Web app <span class="live">● LIVE</span></span>
         <h3>Price Tracker <span class="arrow">↗</span></h3>
-        <p>Product price tracker on Supabase with a single-file HTML frontend, deployed on Vercel.</p>
+        <p data-ko="Supabase와 단일 HTML 프런트엔드로 만든 상품 가격 추적기로, Vercel에 배포했습니다.">Product price tracker on Supabase with a single-file HTML frontend, deployed on Vercel.</p>
         <ul class="tags"><li>Supabase</li><li>JavaScript</li><li>Vercel</li></ul>
       </a>
       <a class="tile span-3" href="https://github.com/nopgae/nun" target="_blank" rel="noreferrer">
-        <span class="kicker">Web app</span>
+        <span class="kicker" data-ko="웹 앱">Web app</span>
         <h3>눈 (Nun) <span class="arrow">↗</span></h3>
-        <p>Real-time map viewer for Korea's public camera feeds.</p>
-        <ul class="tags"><li>Public data APIs</li><li>Maps</li></ul>
+        <p data-ko="국내 공공 CCTV 영상을 지도에서 실시간으로 보는 뷰어입니다.">Real-time map viewer for Korea's public camera feeds.</p>
+        <ul class="tags"><li data-ko="공공데이터 API">Public data APIs</li><li data-ko="지도">Maps</li></ul>
       </a>
       <a class="tile span-3" href="https://github.com/nopgae/lyrics-overlay" target="_blank" rel="noreferrer">
         <span class="kicker">macOS</span>
         <h3>Lyrics Overlay <span class="arrow">↗</span></h3>
-        <p>Always-on-top desktop lyrics overlay synced to MP3 playback and YouTube Music, with LRC / LRCLIB support.</p>
+        <p data-ko="MP3와 YouTube Music 재생에 맞춰 화면 위에 가사를 띄우는 데스크톱 오버레이입니다. LRC / LRCLIB을 지원합니다.">Always-on-top desktop lyrics overlay synced to MP3 playback and YouTube Music, with LRC / LRCLIB support.</p>
         <ul class="tags"><li>Swift</li><li>SwiftUI</li></ul>
       </a>
       <a class="tile span-3" href="https://github.com/nopgae/solve-log" target="_blank" rel="noreferrer">
-        <span class="kicker">Automation</span>
+        <span class="kicker" data-ko="자동화">Automation</span>
         <h3>solve-log <span class="arrow">↗</span></h3>
-        <p>CLI that automatically logs and pushes Baekjoon and webhacking.kr solutions to GitHub.</p>
+        <p data-ko="백준과 webhacking.kr 풀이를 자동으로 기록해 GitHub에 올리는 CLI입니다.">CLI that automatically logs and pushes Baekjoon and webhacking.kr solutions to GitHub.</p>
         <ul class="tags"><li>Python</li><li>CLI</li></ul>
       </a>
     </div>
   </section>
 
   <section id="archive" aria-labelledby="archive-h">
-    <div class="section-head"><h2 id="archive-h">Archive</h2><span class="idx">04</span></div>
+    <div class="section-head"><h2 id="archive-h" data-ko="아카이브">Archive</h2><span class="idx">04</span></div>
     <ul class="archive">
-      <li><a href="https://github.com/nopgae/chicago-crime-weather-analysis" target="_blank" rel="noreferrer"><span class="t">Chicago Crime × Weather</span><span class="m">SQLite · pandas</span><span class="d">SQL analysis of weather vs. crime patterns</span></a></li>
-      <li><a href="https://github.com/nopgae/spot-robot-kinematics" target="_blank" rel="noreferrer"><span class="t">Spot Kinematics</span><span class="m">Python · Blender</span><span class="d">Pose &amp; IK extensions to a Blender Spot rig</span></a></li>
-      <li><a href="https://github.com/nopgae/korean-weather-app" target="_blank" rel="noreferrer"><span class="t">Korean Weather API</span><span class="m">Flask · REST</span><span class="d">Flask dashboard + REST API for 8 cities</span></a></li>
-      <li><a href="https://github.com/nopgae/starbucks-parking-finder" target="_blank" rel="noreferrer"><span class="t">Starbucks Parking</span><span class="m">Web</span><span class="d">Find Korean Starbucks branches with parking</span></a></li>
-      <li><a href="https://github.com/nopgae/car-chatbot" target="_blank" rel="noreferrer"><span class="t">car-chatbot</span><span class="m">LLM</span><span class="d">Car info &amp; pricing chat, backed by Claude</span></a></li>
-      <li><a href="https://github.com/nopgae/car-price-estimator-demo" target="_blank" rel="noreferrer"><span class="t">Car Price Estimator</span><span class="m">ML · Web</span><span class="d">Used-car price estimates from real listings</span></a></li>
+      <li><a href="https://github.com/nopgae/chicago-crime-weather-analysis" target="_blank" rel="noreferrer"><span class="t">Chicago Crime × Weather</span><span class="m">SQLite · pandas</span><span class="d" data-ko="날씨와 범죄 패턴의 SQL 분석">SQL analysis of weather vs. crime patterns</span></a></li>
+      <li><a href="https://github.com/nopgae/spot-robot-kinematics" target="_blank" rel="noreferrer"><span class="t">Spot Kinematics</span><span class="m">Python · Blender</span><span class="d" data-ko="Blender Spot 리그에 자세·IK 기능 추가">Pose &amp; IK extensions to a Blender Spot rig</span></a></li>
+      <li><a href="https://github.com/nopgae/korean-weather-app" target="_blank" rel="noreferrer"><span class="t">Korean Weather API</span><span class="m">Flask · REST</span><span class="d" data-ko="8개 도시 날씨 Flask 대시보드 + REST API">Flask dashboard + REST API for 8 cities</span></a></li>
+      <li><a href="https://github.com/nopgae/starbucks-parking-finder" target="_blank" rel="noreferrer"><span class="t">Starbucks Parking</span><span class="m">Web</span><span class="d" data-ko="주차 가능한 스타벅스 매장 찾기">Find Korean Starbucks branches with parking</span></a></li>
+      <li><a href="https://github.com/nopgae/car-chatbot" target="_blank" rel="noreferrer"><span class="t">car-chatbot</span><span class="m">LLM</span><span class="d" data-ko="Claude 기반 자동차 정보·시세 챗봇">Car info &amp; pricing chat, backed by Claude</span></a></li>
+      <li><a href="https://github.com/nopgae/car-price-estimator-demo" target="_blank" rel="noreferrer"><span class="t">Car Price Estimator</span><span class="m">ML · Web</span><span class="d" data-ko="실제 매물 기반 중고차 시세 추정">Used-car price estimates from real listings</span></a></li>
     </ul>
-    <a class="more" href="https://github.com/nopgae?tab=repositories" target="_blank" rel="noreferrer">All repositories on GitHub ↗</a>
+    <a class="more" href="https://github.com/nopgae?tab=repositories" target="_blank" rel="noreferrer" data-ko="GitHub 전체 저장소 ↗">All repositories on GitHub ↗</a>
 
     <div class="contact">
-      <h2>Let's talk.</h2>
-      <p>Open to data science, ML, and automation roles in Seoul.</p>
+      <h2 data-ko="이야기 나눠요.">Let's talk.</h2>
+      <p data-ko="서울에서 데이터 사이언스·ML·자동화 직무를 찾고 있습니다.">Open to data science, ML, and automation roles in Seoul.</p>
       <div class="actions" style="margin-top:1.5rem">
-        <a class="btn primary" href="mailto:jic.jonginchoi@gmail.com">Email me</a>
-        <a class="btn" href="JonginChoi_Resume.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
+        <a class="btn primary" href="mailto:jic.jonginchoi@gmail.com" data-ko="이메일 보내기">Email me</a>
+        <a class="btn" href="JonginChoi_Resume.pdf" data-href-ko="JonginChoi_Resume_KO.pdf" target="_blank" rel="noreferrer" data-ko="이력서 ↗">Resume ↗</a>
       </div>
     </div>
   </section>
 
   <footer>
-    <span>© 2026 Jongin Choi</span>
-    <span>Hand-written HTML &amp; CSS · no build step</span>
+    <span data-ko="© 2026 최종인">© 2026 Jongin Choi</span>
+    <span data-ko="직접 작성한 HTML·CSS · 빌드 없음">Hand-written HTML &amp; CSS · no build step</span>
   </footer>
 </main>
 
@@ -498,6 +508,32 @@
     });
   }, { rootMargin: "-40% 0px -55% 0px" });
   document.querySelectorAll("main section").forEach((s) => observer.observe(s));
+
+  // 한/EN toggle: swap text from data-ko, and resume links from data-href-ko
+  const META = {
+    en: { title: "Jongin Choi — Data Scientist", desc: "Jongin Choi — data scientist in Seoul. ML, NLP, and automation projects." },
+    ko: { title: "최종인 — 데이터 사이언티스트", desc: "서울의 데이터 사이언티스트 최종인. ML, NLP, 자동화 프로젝트." },
+  };
+  const setLang = (lang) => {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-ko]").forEach((el) => {
+      if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+      el.innerHTML = lang === "ko" ? el.dataset.ko : el.dataset.en;
+    });
+    document.querySelectorAll("[data-href-ko]").forEach((a) => {
+      if (a.dataset.hrefEn === undefined) a.dataset.hrefEn = a.getAttribute("href");
+      a.setAttribute("href", lang === "ko" ? a.dataset.hrefKo : a.dataset.hrefEn);
+    });
+    document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    document.title = META[lang].title;
+    document.querySelector('meta[name="description"]').content = META[lang].desc;
+    try { localStorage.setItem("lang", lang); } catch {}
+  };
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  let saved = null;
+  try { saved = localStorage.getItem("lang"); } catch {}
+  const initial = new URLSearchParams(location.search).get("lang") || saved || (navigator.language.startsWith("ko") ? "ko" : "en");
+  if (initial === "ko") setLang("ko");
 </script>
 </body>
 </html>
