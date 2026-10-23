@@ -276,17 +276,54 @@
     a.tile:hover { transform: none; }
   }
 
-  .lang { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; padding: 2px; background: var(--tile); }
-  .lang button {
-    font: inherit; font-family: var(--mono); font-size: 0.75rem;
-    color: var(--muted); background: none; border: 0; border-radius: 999px;
-    padding: 0.25rem 0.6rem; cursor: pointer;
+  /* Two equal slots with one accent pill that slides between them */
+  .lang {
+    position: relative; display: inline-grid; grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border); border-radius: 999px; padding: 2px; background: var(--tile);
   }
-  .lang button[aria-pressed="true"] { color: var(--bg); background: var(--accent); }
+  .lang::before {
+    content: ""; position: absolute; top: 2px; bottom: 2px; left: 2px; width: calc(50% - 2px);
+    border-radius: 999px; background: var(--accent); transform: translateX(100%);
+  }
+  html.i18n-ready .lang::before { transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  html[lang="ko"] .lang::before { transform: translateX(0); }
+  .lang.bump::before { animation: lang-squish 0.45s ease; }
+  @keyframes lang-squish { 30% { scale: 1.12 0.86; } 60% { scale: 0.96 1.04; } }
+  .lang button {
+    position: relative; z-index: 1; width: 2.6rem;
+    font: inherit; font-family: var(--mono); font-size: 0.75rem; text-align: center;
+    color: var(--muted); background: none; border: 0; border-radius: 999px;
+    padding: 0.25rem 0; cursor: pointer;
+    transition: color 0.3s ease, transform 0.15s ease;
+  }
+  .lang button:hover { color: var(--fg); }
+  .lang button:active { transform: scale(0.88); }
+  .lang button[aria-pressed="true"] { color: var(--bg); }
+
+  /* Both copies share one grid cell so the box never resizes; the outgoing copy
+     slides out and fades while the incoming one rises in. Korean sits "below"
+     English, so the roll direction follows the switch. */
   .i18n { display: inline-grid; }
   .i18n > span { grid-area: 1 / 1; }
   .i18n > [lang="ko"] { word-break: keep-all; }
-  html[lang="ko"] .i18n > [lang="en"], html:not([lang="ko"]) .i18n > [lang="ko"] { visibility: hidden; }
+  /* In buttons and nav links the shorter copy sits centered in the fixed box */
+  .btn .i18n > span, .topbar a.link .i18n > span { justify-self: center; text-align: center; }
+  html[lang="ko"] .i18n > [lang="en"], html:not([lang="ko"]) .i18n > [lang="ko"] { visibility: hidden; opacity: 0; }
+  html[lang="ko"] .i18n > [lang="en"] { transform: translateY(-0.45em); }
+  html:not([lang="ko"]) .i18n > [lang="ko"] { transform: translateY(0.45em); }
+  html.i18n-ready .i18n > span {
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.35s ease, visibility 0s;
+  }
+  html.i18n-ready[lang="ko"] .i18n > [lang="en"],
+  html.i18n-ready:not([lang="ko"]) .i18n > [lang="ko"] {
+    filter: blur(3px);
+    transition: opacity 0.2s ease, transform 0.3s ease, filter 0.2s ease, visibility 0s linear 0.3s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lang.bump::before { animation: none; }
+    html.i18n-ready .lang::before { transition: none; }
+    .i18n > span { transform: none !important; filter: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -547,11 +584,22 @@
     document.querySelector('meta[name="description"]').content = META[lang].desc;
     try { localStorage.setItem("lang", lang); } catch {}
   };
-  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  const toggle = document.querySelector(".lang");
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => {
+    if (b.dataset.lang === document.documentElement.lang) return;
+    // Restart the pill's squish even on quick repeat clicks
+    toggle.classList.remove("bump");
+    void toggle.offsetWidth;
+    toggle.classList.add("bump");
+    setLang(b.dataset.lang);
+  }));
+  toggle.addEventListener("animationend", () => toggle.classList.remove("bump"));
   let saved = null;
   try { saved = localStorage.getItem("lang"); } catch {}
   const initial = new URLSearchParams(location.search).get("lang") || saved || (navigator.language.startsWith("ko") ? "ko" : "en");
   if (initial === "ko") setLang("ko");
+  // Turn transitions on only after the first paint, so a saved language doesn't animate on load
+  requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add("i18n-ready")));
 </script>
 </body>
 </html>
