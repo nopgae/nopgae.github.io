@@ -3,108 +3,483 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>nopgae</title>
+<title>Jongin Choi — Data Scientist</title>
+<meta name="description" content="Jongin Choi — data scientist in Seoul. ML, NLP, and automation projects."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    color-scheme: light dark;
-    --bg: #0f1115;
-    --fg: #e6e6e6;
-    --muted: #9aa0a6;
-    --accent: #7dd3fc;
-    --card: #171a21;
-    --border: #2a2e37;
+    color-scheme: dark;
+    --bg: #09090b;
+    --tile: #111113;
+    --tile-2: #18181b;
+    --border: #27272a;
+    --fg: #e4e4e7;
+    --heading: #fafafa;
+    --muted: #a1a1aa;
+    --faint: #71717a;
+    --accent: #bef264;
+    --accent-dim: rgba(190, 242, 100, 0.12);
+    --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --radius: 18px;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: var(--bg);
-    color: var(--fg);
-    line-height: 1.5;
-  }
-  main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 4rem 1.5rem;
-  }
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 0.25rem;
-  }
-  p.intro {
     color: var(--muted);
-    margin-top: 0;
-    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  h2 {
-    font-size: 1.1rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus {
+    left: 1rem; top: 1rem; z-index: 20;
+    padding: 0.5rem 1rem;
+    background: var(--accent); color: var(--bg);
+    border-radius: 8px;
   }
-  .projects {
-    display: grid;
-    gap: 0.75rem;
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* Top nav */
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(9, 9, 11, 0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
   }
-  .project {
-    display: block;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--border);
+  .topbar.scrolled { border-bottom-color: var(--border); }
+  .topbar .container {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .mono-logo {
+    display: grid; place-items: center;
+    width: 36px; height: 36px;
     border-radius: 10px;
-    background: var(--card);
-    text-decoration: none;
-    color: inherit;
+    background: var(--accent); color: var(--bg);
+    font-family: var(--mono); font-weight: 500; font-size: 0.85rem;
   }
-  .project:hover {
-    border-color: var(--accent);
+  .topbar nav { display: flex; align-items: center; gap: 1.5rem; font-size: 0.88rem; }
+  .topbar nav a.link { display: none; color: var(--muted); transition: color 0.15s; }
+  .topbar nav a.link:hover, .topbar nav a.link.active { color: var(--heading); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.88rem; font-weight: 500;
+    color: var(--heading);
+    background: var(--tile);
+    transition: border-color 0.15s, background 0.15s;
   }
-  .project h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1rem;
+  .btn:hover { border-color: var(--faint); background: var(--tile-2); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .btn.primary:hover { background: #d9f99d; border-color: #d9f99d; }
+  .btn svg { width: 16px; height: 16px; }
+  .btn.sm { padding: 0.4rem 0.85rem; font-size: 0.82rem; }
+
+  /* Hero */
+  .hero { padding: 5rem 0 3.5rem; }
+  .status {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border); border-radius: 999px;
+    font-family: var(--mono); font-size: 0.75rem; color: var(--muted);
+  }
+  .status::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 10px var(--accent);
+  }
+  .hero h1 {
+    margin: 1.5rem 0 0;
+    font-size: clamp(2.75rem, 8vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    color: var(--heading);
+  }
+  .hero .role {
+    margin: 0.9rem 0 0;
+    font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+    color: var(--heading);
+    font-weight: 500;
+  }
+  .hero .role span { color: var(--accent); }
+  .hero .tagline { max-width: 36rem; margin: 1rem 0 0; font-size: 1.02rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+
+  /* Section heads */
+  section { padding: 2.5rem 0; scroll-margin-top: 72px; }
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .section-head h2 {
+    margin: 0;
+    font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em;
+    color: var(--heading);
+  }
+  .section-head .idx { font-family: var(--mono); font-size: 0.78rem; color: var(--faint); }
+
+  /* Bento grid */
+  .bento { display: grid; grid-template-columns: 1fr; gap: 0.9rem; }
+  .tile {
+    --x: 50%; --y: 50%;
+    position: relative;
+    display: flex; flex-direction: column;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--tile);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  /* Cursor-following glow, clipped to the tile */
+  .tile::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: radial-gradient(420px circle at var(--x) var(--y), var(--accent-dim), transparent 60%);
+    opacity: 0; transition: opacity 0.25s;
+  }
+  a.tile:hover { transform: translateY(-2px); border-color: #3f3f46; }
+  a.tile:hover::before { opacity: 1; }
+  .tile .kicker {
+    font-family: var(--mono); font-size: 0.72rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--faint);
+  }
+  .tile h3 {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    margin: 0.5rem 0 0;
+    font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--heading);
+  }
+  .tile h3 .arrow {
+    flex-shrink: 0;
+    display: grid; place-items: center;
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1px solid var(--border);
+    font-size: 0.85rem; color: var(--muted);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  a.tile:hover h3 .arrow { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .tile p { margin: 0.5rem 0 0; font-size: 0.92rem; }
+  .tile .spacer { flex: 1; min-height: 1rem; }
+
+  .big {
+    font-size: clamp(2.5rem, 6vw, 3.6rem);
+    font-weight: 600; letter-spacing: -0.04em; line-height: 1;
     color: var(--accent);
   }
-  .project p {
+  .big small { font-size: 0.38em; letter-spacing: 0; color: var(--muted); font-weight: 500; margin-left: 0.35rem; }
+  .stats { display: flex; flex-wrap: wrap; gap: 2rem; }
+  .stats .big { font-size: clamp(2.2rem, 5vw, 3rem); }
+  .stats .lbl { margin-top: 0.35rem; font-family: var(--mono); font-size: 0.75rem; color: var(--faint); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+  .tags li {
+    padding: 0.18rem 0.6rem;
+    border: 1px solid var(--border); border-radius: 999px;
+    font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+  }
+
+  /* KOSPI: model vs baseline bars */
+  .bars { display: grid; gap: 0.6rem; margin-top: 1.25rem; }
+  .bar { display: grid; grid-template-columns: 5.5rem 1fr 3.5rem; align-items: center; gap: 0.75rem; font-size: 0.8rem; }
+  .bar .name { font-family: var(--mono); color: var(--faint); font-size: 0.72rem; }
+  .bar .track { height: 8px; border-radius: 99px; background: var(--tile-2); overflow: hidden; }
+  .bar .fill { height: 100%; border-radius: 99px; background: var(--faint); }
+  .bar.model .fill { background: var(--accent); }
+  .bar .val { font-family: var(--mono); color: var(--heading); text-align: right; }
+
+  /* About tile */
+  .about p { color: var(--fg); font-size: 0.98rem; }
+  .about p + p { margin-top: 0.75rem; }
+  .about strong { color: var(--heading); font-weight: 600; }
+  .stack { display: grid; gap: 0.9rem; margin: 0.75rem 0 0; }
+  .stack dt { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+  .stack dd { margin: 0.15rem 0 0; color: var(--fg); font-size: 0.9rem; }
+
+  .live {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    margin-left: 0.5rem; padding: 0.05rem 0.5rem;
+    border-radius: 999px; background: var(--accent-dim); color: var(--accent);
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.04em; vertical-align: middle;
+  }
+
+  /* Archive */
+  .archive { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+  .archive a {
+    display: grid; grid-template-columns: 1fr auto; gap: 0.25rem 1rem;
+    padding: 1rem 0.25rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s, padding 0.15s;
+  }
+  .archive a:hover { background: var(--tile); padding-left: 0.75rem; padding-right: 0.75rem; }
+  .archive .t { color: var(--heading); font-weight: 500; }
+  .archive .m { font-family: var(--mono); font-size: 0.72rem; color: var(--faint); text-align: right; }
+  .archive .d { grid-column: 1 / -1; font-size: 0.88rem; }
+  .more { display: inline-block; margin-top: 1.25rem; font-size: 0.9rem; color: var(--heading); }
+  .more:hover { color: var(--accent); }
+
+  /* Contact band */
+  .contact {
+    margin: 2.5rem 0 0;
+    padding: 2.5rem 1.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background:
+      radial-gradient(600px circle at 0% 0%, var(--accent-dim), transparent 60%),
+      var(--tile);
+  }
+  .contact h2 {
     margin: 0;
-    color: var(--muted);
-    font-size: 0.9rem;
+    font-size: clamp(1.6rem, 4vw, 2.25rem); font-weight: 600; letter-spacing: -0.03em;
+    color: var(--heading);
   }
+  .contact p { margin: 0.5rem 0 0; }
+
   footer {
-    margin-top: 3rem;
-    color: var(--muted);
-    font-size: 0.85rem;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem;
+    padding: 2rem 0 3rem;
+    font-family: var(--mono); font-size: 0.75rem; color: var(--faint);
   }
-  footer a { color: var(--accent); }
+
+  @media (min-width: 720px) {
+    .topbar nav a.link { display: inline; }
+    .bento { grid-template-columns: repeat(6, 1fr); }
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .tile { padding: 1.75rem; }
+    .contact { padding: 3rem; }
+  }
+  @media (min-width: 720px) and (max-width: 959px) {
+    /* Two-column fallback on tablets: 2-wide tiles get 3 */
+    .span-2 { grid-column: span 3; }
+    .span-4 { grid-column: span 6; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+    a.tile:hover { transform: none; }
+  }
 </style>
 </head>
 <body>
-<main>
-  <h1>nopgae</h1>
-  <p class="intro">Data science &amp; software projects.</p>
+<a class="skip" href="#content">Skip to content</a>
 
-  <h2>Projects</h2>
-  <div class="projects">
-    <a class="project" href="https://github.com/nopgae/car-chatbot">
-      <h3>car-chatbot</h3>
-      <p>Chat interface for car information, comparisons, and pricing, backed by Claude.</p>
-    </a>
-    <a class="project" href="https://github.com/nopgae/car-price-estimator-demo">
-      <h3>car-price-estimator-demo</h3>
-      <p>Demo app estimating used-car prices from make/model/year using real used-car data.</p>
-    </a>
-    <a class="project" href="https://github.com/nopgae/UsedCarAroundMe">
-      <h3>UsedCarAroundMe</h3>
-      <p>Browse used car listings near a location.</p>
-    </a>
-    <a class="project" href="https://github.com/nopgae/YTmusicShowcase">
-      <h3>YTmusicShowcase</h3>
-      <p>A showcase page for curated YouTube Music playlists.</p>
-    </a>
+<header class="topbar">
+  <div class="container">
+    <a class="mono-logo" href="#top" aria-label="Jongin Choi — home">JC</a>
+    <nav aria-label="Primary">
+      <a class="link" href="#about">About</a>
+      <a class="link" href="#work">Work</a>
+      <a class="link" href="#shipped">Shipped</a>
+      <a class="link" href="#archive">Archive</a>
+      <a class="btn sm primary" href="JonginChoi_Resume.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="content" class="container">
+  <div class="hero" id="top">
+    <span class="status">Seoul · open to opportunities</span>
+    <h1>Jongin Choi</h1>
+    <p class="role">Data Scientist <span>/</span> ML &amp; Automation</p>
+    <p class="tagline">I build ML pipelines and small tools that turn messy real-world data into decisions — with a focus on logistics and operations.</p>
+    <div class="actions">
+      <a class="btn primary" href="JonginChoi_Resume.pdf" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+        Resume
+      </a>
+      <a class="btn" href="mailto:jic.jonginchoi@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        jic.jonginchoi@gmail.com
+      </a>
+      <a class="btn" href="https://github.com/nopgae" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+      <!-- TODO: LinkedIn — add once the profile URL is ready
+      <a class="btn" href="https://www.linkedin.com/in/YOUR-ID" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        LinkedIn
+      </a>
+      -->
+    </div>
   </div>
 
+  <section id="about" aria-labelledby="about-h">
+    <div class="section-head"><h2 id="about-h">About</h2><span class="idx">01</span></div>
+    <div class="bento">
+      <div class="tile span-4 about">
+        <span class="kicker">Who I am</span>
+        <p style="margin-top:0.75rem">I'm a data scientist based in <strong>Seoul</strong>, back in Korea after 13 years in the US. I studied <strong>Applied Data Science at Penn State</strong> (B.S., 2025), where I worked as a research assistant on a large-scale multimodal emotion dataset.</p>
+        <p>Most of my work sits between modeling and engineering: scraping and cleaning data, training and honestly evaluating models, then wrapping the result in something people can use — an API, a dashboard, or a small app. I'm especially interested in ML and automation for <strong>logistics and operations</strong>.</p>
+        <p>Fully bilingual in <strong>Korean and English</strong>.</p>
+      </div>
+      <div class="tile span-2">
+        <span class="kicker">Stack</span>
+        <dl class="stack">
+          <div><dt>Languages</dt><dd>Python, TypeScript, SQL</dd></div>
+          <div><dt>ML / NLP</dt><dd>PyTorch, Hugging Face, XGBoost, scikit-learn</dd></div>
+          <div><dt>Data</dt><dd>pandas, SQLite, Plotly, scraping</dd></div>
+          <div><dt>Apps</dt><dd>FastAPI, Flask, React Native, Supabase</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" aria-labelledby="work-h">
+    <div class="section-head"><h2 id="work-h">Research &amp; ML work</h2><span class="idx">02</span></div>
+    <div class="bento">
+      <a class="tile span-4" href="https://github.com/nopgae/feelreel-mini" target="_blank" rel="noreferrer">
+        <span class="kicker">Research Assistant · Penn State · Jun 2024 – Mar 2025</span>
+        <h3>FeelReel — multimodal emotion benchmark <span class="arrow">↗</span></h3>
+        <p>Joined the follow-up phase of FeelReel, a lab dataset project of Reddit images and comments for emotion understanding (an earlier version was submitted to CVPR 2024). My role was on the data side: sourcing and organizing Reddit data through the collection pipeline, and building the MTurk survey page used to collect human evaluations.</p>
+        <div class="spacer"></div>
+        <div class="stats">
+          <div><div class="big">400K+</div><div class="lbl">images (project dataset)</div></div>
+          <div><div class="big">5M+</div><div class="lbl">comments (project dataset)</div></div>
+        </div>
+        <ul class="tags"><li>Reddit API / PRAW</li><li>Data curation</li><li>MTurk</li></ul>
+        <p style="font-size:0.8rem;color:var(--faint);margin-top:1rem">Repo: <span style="color:var(--muted)">feelreel-mini</span> — my own small-scale recreation of the pipeline with public tools. Not the lab's code or data.</p>
+      </a>
+
+      <a class="tile span-2" href="https://github.com/nopgae/financial-distress-prediction" target="_blank" rel="noreferrer">
+        <span class="kicker">Classification</span>
+        <h3>Financial Distress <span class="arrow">↗</span></h3>
+        <p>Corporate distress from 30+ financial ratios, with SMOTE for class imbalance and stratified 5-fold CV.</p>
+        <div class="spacer"></div>
+        <div class="big">0.885<small>ROC-AUC</small></div>
+        <ul class="tags"><li>XGBoost</li><li>SMOTE</li></ul>
+      </a>
+
+      <a class="tile span-2" href="https://github.com/nopgae/reddit-sentiment-roberta" target="_blank" rel="noreferrer">
+        <span class="kicker">NLP</span>
+        <h3>Reddit Sentiment <span class="arrow">↗</span></h3>
+        <p>RoBERTa sentiment pipeline over e-commerce, Korean tech, logistics, and supply-chain communities.</p>
+        <div class="spacer"></div>
+        <div class="big">563<small>posts · 7 subs</small></div>
+        <ul class="tags"><li>RoBERTa</li><li>Hugging Face</li></ul>
+      </a>
+
+      <a class="tile span-4" href="https://github.com/nopgae/kospi-stock-prediction" target="_blank" rel="noreferrer">
+        <span class="kicker">Time series · honest eval</span>
+        <h3>KOSPI price direction <span class="arrow">↗</span></h3>
+        <p>Live KRX data, 12 hand-built technical indicators, and a leakage-free chronological split. The model doesn't beat the naive baseline on Samsung Electronics — the write-up explains why that's the expected result in an efficient market.</p>
+        <div class="spacer"></div>
+        <div class="bars" aria-label="Accuracy: model 49.4%, always-up baseline 57.6%">
+          <div class="bar model"><span class="name">XGBoost</span><span class="track"><span class="fill" style="display:block;width:49.4%"></span></span><span class="val">49.4%</span></div>
+          <div class="bar"><span class="name">Always up</span><span class="track"><span class="fill" style="display:block;width:57.6%"></span></span><span class="val">57.6%</span></div>
+        </div>
+        <ul class="tags"><li>XGBoost</li><li>yfinance</li><li>Plotly</li></ul>
+      </a>
+
+      <a class="tile span-6" href="https://github.com/nopgae/nlp-text-embedding-comparison" target="_blank" rel="noreferrer">
+        <span class="kicker">Multimodal</span>
+        <h3>From N-grams to CLIP <span class="arrow">↗</span></h3>
+        <p>Text representations from n-grams through Word2Vec, GloVe, ELMo, and BERT — plus BERT + ResNet-50 multimodal fusion and CLIP zero-shot classification.</p>
+        <ul class="tags"><li>PyTorch</li><li>BERT</li><li>CLIP</li><li>ResNet-50</li></ul>
+      </a>
+    </div>
+  </section>
+
+  <section id="shipped" aria-labelledby="shipped-h">
+    <div class="section-head"><h2 id="shipped-h">Built &amp; shipped</h2><span class="idx">03</span></div>
+    <div class="bento">
+      <a class="tile span-3" href="https://price-tracker-theta-umber.vercel.app" target="_blank" rel="noreferrer">
+        <span class="kicker">Web app <span class="live">● LIVE</span></span>
+        <h3>Price Tracker <span class="arrow">↗</span></h3>
+        <p>Product price tracker on Supabase with a single-file HTML frontend, deployed on Vercel.</p>
+        <ul class="tags"><li>Supabase</li><li>JavaScript</li><li>Vercel</li></ul>
+      </a>
+      <a class="tile span-3" href="https://github.com/nopgae/nun" target="_blank" rel="noreferrer">
+        <span class="kicker">Web app</span>
+        <h3>눈 (Nun) <span class="arrow">↗</span></h3>
+        <p>Real-time map viewer for Korea's public camera feeds.</p>
+        <ul class="tags"><li>Public data APIs</li><li>Maps</li></ul>
+      </a>
+      <a class="tile span-3" href="https://github.com/nopgae/lyrics-overlay" target="_blank" rel="noreferrer">
+        <span class="kicker">macOS</span>
+        <h3>Lyrics Overlay <span class="arrow">↗</span></h3>
+        <p>Always-on-top desktop lyrics overlay synced to MP3 playback and YouTube Music, with LRC / LRCLIB support.</p>
+        <ul class="tags"><li>Swift</li><li>SwiftUI</li></ul>
+      </a>
+      <a class="tile span-3" href="https://github.com/nopgae/solve-log" target="_blank" rel="noreferrer">
+        <span class="kicker">Automation</span>
+        <h3>solve-log <span class="arrow">↗</span></h3>
+        <p>CLI that automatically logs and pushes Baekjoon and webhacking.kr solutions to GitHub.</p>
+        <ul class="tags"><li>Python</li><li>CLI</li></ul>
+      </a>
+    </div>
+  </section>
+
+  <section id="archive" aria-labelledby="archive-h">
+    <div class="section-head"><h2 id="archive-h">Archive</h2><span class="idx">04</span></div>
+    <ul class="archive">
+      <li><a href="https://github.com/nopgae/chicago-crime-weather-analysis" target="_blank" rel="noreferrer"><span class="t">Chicago Crime × Weather</span><span class="m">SQLite · pandas</span><span class="d">SQL analysis of weather vs. crime patterns</span></a></li>
+      <li><a href="https://github.com/nopgae/spot-robot-kinematics" target="_blank" rel="noreferrer"><span class="t">Spot Kinematics</span><span class="m">Python · Blender</span><span class="d">Pose &amp; IK extensions to a Blender Spot rig</span></a></li>
+      <li><a href="https://github.com/nopgae/korean-weather-app" target="_blank" rel="noreferrer"><span class="t">Korean Weather API</span><span class="m">Flask · REST</span><span class="d">Flask dashboard + REST API for 8 cities</span></a></li>
+      <li><a href="https://github.com/nopgae/starbucks-parking-finder" target="_blank" rel="noreferrer"><span class="t">Starbucks Parking</span><span class="m">Web</span><span class="d">Find Korean Starbucks branches with parking</span></a></li>
+      <li><a href="https://github.com/nopgae/car-chatbot" target="_blank" rel="noreferrer"><span class="t">car-chatbot</span><span class="m">LLM</span><span class="d">Car info &amp; pricing chat, backed by Claude</span></a></li>
+      <li><a href="https://github.com/nopgae/car-price-estimator-demo" target="_blank" rel="noreferrer"><span class="t">Car Price Estimator</span><span class="m">ML · Web</span><span class="d">Used-car price estimates from real listings</span></a></li>
+    </ul>
+    <a class="more" href="https://github.com/nopgae?tab=repositories" target="_blank" rel="noreferrer">All repositories on GitHub ↗</a>
+
+    <div class="contact">
+      <h2>Let's talk.</h2>
+      <p>Open to data science, ML, and automation roles in Seoul.</p>
+      <div class="actions" style="margin-top:1.5rem">
+        <a class="btn primary" href="mailto:jic.jonginchoi@gmail.com">Email me</a>
+        <a class="btn" href="JonginChoi_Resume.pdf" target="_blank" rel="noreferrer">Resume ↗</a>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    More projects on <a href="https://github.com/nopgae">github.com/nopgae</a>.
+    <span>© 2026 Jongin Choi</span>
+    <span>Hand-written HTML &amp; CSS · no build step</span>
   </footer>
 </main>
+
+<script>
+  // Per-tile glow follows the cursor
+  document.querySelectorAll(".tile").forEach((tile) => {
+    tile.addEventListener("pointermove", (e) => {
+      const r = tile.getBoundingClientRect();
+      tile.style.setProperty("--x", `${e.clientX - r.left}px`);
+      tile.style.setProperty("--y", `${e.clientY - r.top}px`);
+    });
+  });
+
+  // Border under the top bar once scrolled
+  const bar = document.querySelector(".topbar");
+  const onScroll = () => bar.classList.toggle("scrolled", scrollY > 8);
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Highlight the nav link for the section in view
+  const links = document.querySelectorAll(".topbar a.link");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id));
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll("main section").forEach((s) => observer.observe(s));
+</script>
 </body>
 </html>
