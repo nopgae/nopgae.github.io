@@ -172,6 +172,7 @@
   }
   a.tile:hover h3 .arrow { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .tile p { margin: 0.5rem 0 0; font-size: 0.92rem; }
+  .tile .pdr { font-size: 0.82rem; color: var(--muted); }
   .tile .spacer { flex: 1; min-height: 1rem; }
 
   .big {
@@ -325,8 +326,8 @@
     <a class="mono-logo" href="#top" aria-label="Jongin Choi — home">JC</a>
     <nav aria-label="Primary">
       <a class="link" href="#about" data-ko="소개">About</a>
-      <a class="link" href="#work" data-ko="연구·ML">Work</a>
-      <a class="link" href="#shipped" data-ko="만든 것">Shipped</a>
+      <a class="link" href="#work" data-ko="데이터·ML">Data &amp; ML</a>
+      <a class="link" href="#shipped" data-ko="자동화">Automation</a>
       <a class="link" href="#archive" data-ko="아카이브">Archive</a>
       <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="ko" aria-pressed="false">한</button><button type="button" data-lang="en" aria-pressed="true">EN</button></div>
     </nav>
@@ -383,7 +384,7 @@
   </section>
 
   <section id="work" aria-labelledby="work-h">
-    <div class="section-head"><h2 id="work-h" data-ko="연구 · ML">Research &amp; ML work</h2><span class="idx">02</span></div>
+    <div class="section-head"><h2 id="work-h" data-ko="데이터분석 · ML">Data analysis &amp; ML</h2><span class="idx">02</span></div>
     <div class="bento">
       <a class="tile span-4" href="https://github.com/nopgae/feelreel-mini" target="_blank" rel="noreferrer">
         <span class="kicker" data-ko="연구보조원 · Penn State · 2024.06 ~ 2025.03">Research Assistant · Penn State · Jun 2024 – Mar 2025</span>
@@ -403,6 +404,7 @@
         <span class="kicker">NLP</span>
         <h3 data-ko="Reddit 감성 분석 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">Reddit Sentiment <span class="arrow">↗</span></h3>
         <p data-ko="이커머스·한국 테크·물류·공급망 커뮤니티를 대상으로 한 RoBERTa 감성 분석 파이프라인입니다.">RoBERTa sentiment pipeline over e-commerce, Korean tech, logistics, and supply-chain communities.</p>
+        <p class="pdr" data-ko="문제: 물류와 이커머스 커뮤니티의 반응 차이 → RoBERTa로 게시물 563개 분류 → r/supplychain이 가장 긍정적, r/ecommerce가 가장 부정적">Problem: how do logistics vs. e-commerce communities feel? → Classified 563 posts with RoBERTa → r/supplychain most positive, r/ecommerce most negative.</p>
         <div class="spacer"></div>
         <div class="big">563<small data-ko="게시물 · 7개 커뮤니티">posts · 7 subs</small></div>
         <ul class="tags"><li>RoBERTa</li><li>Hugging Face</li></ul>
@@ -413,6 +415,7 @@
         <span class="kicker" data-ko="멀티모달">Multimodal</span>
         <h3 data-ko="N-gram에서 CLIP까지 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">From N-grams to CLIP <span class="arrow">↗</span></h3>
         <p data-ko="n-gram부터 Word2Vec, GloVe, ELMo, BERT까지 텍스트 표현을 비교하고, BERT + ResNet-50 멀티모달 결합과 CLIP 제로샷 분류까지 다뤘습니다.">Text representations from n-grams through Word2Vec, GloVe, ELMo, and BERT — plus BERT + ResNet-50 multimodal fusion and CLIP zero-shot classification.</p>
+        <p class="pdr" data-ko="문제: 이미지를 더하면 텍스트 분류가 나아지는가 → BERT + ResNet-50 결합 방식 5가지 비교 → bilinear 결합 정확도 0.850 (텍스트만 0.785)">Problem: does adding images help text classification? → Compared five BERT + ResNet-50 fusion methods → bilinear fusion 0.850 accuracy vs. 0.785 text-only.</p>
         <ul class="tags"><li>PyTorch</li><li>BERT</li><li>CLIP</li><li>ResNet-50</li></ul>
       </a>
 
@@ -437,30 +440,43 @@
   </section>
 
   <section id="shipped" aria-labelledby="shipped-h">
-    <div class="section-head"><h2 id="shipped-h" data-ko="만들어서 공개한 것">Built &amp; shipped</h2><span class="idx">03</span></div>
+    <div class="section-head"><h2 id="shipped-h" data-ko="자동화 · 클라우드">Automation &amp; cloud</h2><span class="idx">03</span></div>
     <div class="bento">
+      <a class="tile span-6" href="https://nopgae.github.io/starbucks-parking-finder/" target="_blank" rel="noreferrer">
+        <span class="kicker" data-ko="데이터 파이프라인 + API &lt;span class=&quot;live&quot;&gt;● 운영 중&lt;/span&gt;">Data pipeline + API <span class="live">● LIVE</span></span>
+        <h3 data-ko="스타벅스 주차 검색 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">Starbucks Parking Finder <span class="arrow">↗</span></h3>
+        <p data-ko="공식 매장 찾기는 주차 정보가 자유 텍스트라 &quot;2시간 이상 무료 주차&quot; 같은 조건으로 거를 수 없습니다. 매장 데이터를 수집해 주차 메모를 구조화하고, &lt;code&gt;강남역 근처 두시간 이상 무료 주차&lt;/code&gt; 같은 한국어 문장으로 검색하는 API와 지도를 만들었습니다.">The official store locator only has free-text parking notes, so you can't filter by "free parking for 2+ hours". I collected the store data, parsed the notes into structured fields, and built an API and map that take plain-Korean queries like <code>강남역 근처 두시간 이상 무료 주차</code>.</p>
+        <p class="pdr" data-ko="문제: 거를 수 없는 주차 메모 → Playwright 수집, 주차·질의 파서(단위 테스트 11개, CI), Fastify + PostgreSQL API → 매장 2,131곳 수집, 1,514곳 주차 정보 구조화">Problem: unfilterable parking notes → Playwright scraper, parking and query parsers (11 unit tests, CI), Fastify + PostgreSQL API → 2,131 stores collected, 1,514 with structured parking info.</p>
+        <div class="spacer"></div>
+        <div class="big">2,131<small data-ko="매장 · 주차 정보 1,514곳">stores · 1,514 with parking</small></div>
+        <ul class="tags"><li>TypeScript</li><li>Playwright</li><li>Fastify</li><li>PostgreSQL</li><li>Render</li></ul>
+      </a>
       <a class="tile span-3" href="https://price-tracker-theta-umber.vercel.app" target="_blank" rel="noreferrer">
         <span class="kicker" data-ko="웹 앱 &lt;span class=&quot;live&quot;&gt;● 운영 중&lt;/span&gt;">Web app <span class="live">● LIVE</span></span>
         <h3>Price Tracker <span class="arrow">↗</span></h3>
         <p data-ko="Supabase와 단일 HTML 프런트엔드로 만든 상품 가격 추적기로, Vercel에 배포했습니다.">Product price tracker on Supabase with a single-file HTML frontend, deployed on Vercel.</p>
+        <p class="pdr" data-ko="문제: 쇼핑몰마다 흩어진 가격 기록 → Supabase(RLS)에 기록하고 SVG 차트로 추이 표시 → 목표가에 도달하면 바로 표시">Problem: price checks scattered across stores → Logged to Supabase (RLS) with an inline SVG trend chart → Target-price hits flagged at a glance.</p>
         <ul class="tags"><li>Supabase</li><li>JavaScript</li><li>Vercel</li></ul>
       </a>
       <a class="tile span-3" href="https://github.com/nopgae/nun" target="_blank" rel="noreferrer">
         <span class="kicker" data-ko="웹 앱">Web app</span>
         <h3>눈 (Nun) <span class="arrow">↗</span></h3>
         <p data-ko="국내 공공 CCTV 영상을 지도에서 실시간으로 보는 뷰어입니다.">Real-time map viewer for Korea's public camera feeds.</p>
+        <p class="pdr" data-ko="문제: 공공 카메라 영상이 여러 곳에 흩어져 있음 → ITS 교통 CCTV API와 공개 웹캠을 지도 하나로 합치고 서버에서 이미지 프록시 → 마커를 클릭하면 바로 시청">Problem: public camera feeds are scattered → Merged ITS traffic CCTV API and public webcams on one map, with a server-side image proxy → Click a marker to watch the feed.</p>
         <ul class="tags"><li data-ko="공공데이터 API">Public data APIs</li><li data-ko="지도">Maps</li></ul>
       </a>
       <a class="tile span-3" href="https://github.com/nopgae/lyrics-overlay" target="_blank" rel="noreferrer">
         <span class="kicker">macOS</span>
         <h3>Lyrics Overlay <span class="arrow">↗</span></h3>
         <p data-ko="MP3와 YouTube Music 재생에 맞춰 화면 위에 가사를 띄우는 데스크톱 오버레이입니다. LRC / LRCLIB을 지원합니다.">Always-on-top desktop lyrics overlay synced to MP3 playback and YouTube Music, with LRC / LRCLIB support.</p>
+        <p class="pdr" data-ko="문제: 작업 중에 싱크 가사를 볼 방법이 없음 → 곡 길이로 가사를 검증하고 캐시하는 메뉴바 앱 → 싱크 로직 단위 테스트(swift test)">Problem: no synced lyrics while working → Native menu-bar app that matches lyrics by track length and caches them → Unit-tested sync core (swift test).</p>
         <ul class="tags"><li>Swift</li><li>SwiftUI</li></ul>
       </a>
       <a class="tile span-3" href="https://github.com/nopgae/solve-log" target="_blank" rel="noreferrer">
         <span class="kicker" data-ko="자동화">Automation</span>
         <h3>solve-log <span class="arrow">↗</span></h3>
         <p data-ko="백준과 webhacking.kr 풀이를 자동으로 기록해 GitHub에 올리는 CLI입니다.">CLI that automatically logs and pushes Baekjoon and webhacking.kr solutions to GitHub.</p>
+        <p class="pdr" data-ko="문제: 풀 때마다 직접 기록하고 커밋 → solve 명령 하나로 문제 정보 수집, 폴더 생성, 통계 갱신, 커밋 → 수작업 기록 없음">Problem: manual logging and commits for each solve → One `solve` command fetches the problem, scaffolds a folder, updates stats and commits → Zero manual bookkeeping.</p>
         <ul class="tags"><li>Python</li><li>CLI</li></ul>
       </a>
     </div>
@@ -472,7 +488,6 @@
       <li><a href="https://github.com/nopgae/chicago-crime-weather-analysis" target="_blank" rel="noreferrer"><span class="t">Chicago Crime × Weather</span><span class="m">SQLite · pandas</span><span class="d" data-ko="날씨와 범죄 패턴의 SQL 분석">SQL analysis of weather vs. crime patterns</span></a></li>
       <li><a href="https://github.com/nopgae/spot-robot-kinematics" target="_blank" rel="noreferrer"><span class="t">Spot Kinematics</span><span class="m">Python · Blender</span><span class="d" data-ko="Blender Spot 리그에 자세·IK 기능 추가">Pose &amp; IK extensions to a Blender Spot rig</span></a></li>
       <li><a href="https://github.com/nopgae/korean-weather-app" target="_blank" rel="noreferrer"><span class="t">Korean Weather API</span><span class="m">Flask · REST</span><span class="d" data-ko="8개 도시 날씨 Flask 대시보드 + REST API">Flask dashboard + REST API for 8 cities</span></a></li>
-      <li><a href="https://github.com/nopgae/starbucks-parking-finder" target="_blank" rel="noreferrer"><span class="t">Starbucks Parking</span><span class="m">Web</span><span class="d" data-ko="주차 가능한 스타벅스 매장 찾기">Find Korean Starbucks branches with parking</span></a></li>
       <li><a href="https://github.com/nopgae/car-chatbot" target="_blank" rel="noreferrer"><span class="t">car-chatbot</span><span class="m">LLM</span><span class="d" data-ko="Claude 기반 자동차 정보·시세 챗봇">Car info &amp; pricing chat, backed by Claude</span></a></li>
       <li><a href="https://github.com/nopgae/car-price-estimator-demo" target="_blank" rel="noreferrer"><span class="t">Car Price Estimator</span><span class="m">ML · Web</span><span class="d" data-ko="실제 매물 기반 중고차 시세 추정">Used-car price estimates from real listings</span></a></li>
     </ul>
