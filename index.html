@@ -191,15 +191,6 @@
     font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
   }
 
-  /* KOSPI: model vs baseline bars */
-  .bars { display: grid; gap: 0.6rem; margin-top: 1.25rem; }
-  .bar { display: grid; grid-template-columns: 5.5rem 1fr 3.5rem; align-items: center; gap: 0.75rem; font-size: 0.8rem; }
-  .bar .name { font-family: var(--mono); color: var(--faint); font-size: 0.72rem; }
-  .bar .track { height: 8px; border-radius: 99px; background: var(--tile-2); overflow: hidden; }
-  .bar .fill { height: 100%; border-radius: 99px; background: var(--faint); }
-  .bar.model .fill { background: var(--accent); }
-  .bar .val { font-family: var(--mono); color: var(--heading); text-align: right; }
-
   /* About tile */
   .about p { color: var(--fg); font-size: 0.98rem; }
   .about p + p { margin-top: 0.75rem; }
@@ -407,14 +398,6 @@
         <p style="font-size:0.8rem;color:var(--faint);margin-top:1rem" data-ko="저장소: &lt;span style=&quot;color:var(--muted)&quot;&gt;feelreel-mini&lt;/span&gt; — 공개 도구로 파이프라인을 작게 재현한 개인 프로젝트입니다. 연구실의 코드나 데이터가 아닙니다.">Repo: <span style="color:var(--muted)">feelreel-mini</span> — my own small-scale recreation of the pipeline with public tools. Not the lab's code or data.</p>
       </a>
 
-      <a class="tile span-2" href="https://github.com/nopgae/financial-distress-prediction" target="_blank" rel="noreferrer">
-        <span class="kicker" data-ko="분류">Classification</span>
-        <h3 data-ko="기업 부실 예측 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">Financial Distress <span class="arrow">↗</span></h3>
-        <p data-ko="재무비율 30여 개로 기업 부실을 예측합니다. 클래스 불균형은 SMOTE로, 검증은 층화 5-fold 교차검증으로 했습니다.">Corporate distress from 30+ financial ratios, with SMOTE for class imbalance and stratified 5-fold CV.</p>
-        <div class="spacer"></div>
-        <div class="big">0.885<small>ROC-AUC</small></div>
-        <ul class="tags"><li>XGBoost</li><li>SMOTE</li></ul>
-      </a>
 
       <a class="tile span-2" href="https://github.com/nopgae/reddit-sentiment-roberta" target="_blank" rel="noreferrer">
         <span class="kicker">NLP</span>
@@ -425,17 +408,6 @@
         <ul class="tags"><li>RoBERTa</li><li>Hugging Face</li></ul>
       </a>
 
-      <a class="tile span-4" href="https://github.com/nopgae/kospi-stock-prediction" target="_blank" rel="noreferrer">
-        <span class="kicker" data-ko="시계열 · 정직한 평가">Time series · honest eval</span>
-        <h3 data-ko="KOSPI 등락 예측 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">KOSPI price direction <span class="arrow">↗</span></h3>
-        <p data-ko="실시간 KRX 데이터, 직접 만든 기술적 지표 12개, 정보 누수 없는 시간순 분할을 썼습니다. 삼성전자에서 모델은 단순 기준선을 이기지 못했고, 효율적 시장에서는 이것이 예상된 결과인 이유를 정리했습니다.">Live KRX data, 12 hand-built technical indicators, and a leakage-free chronological split. The model doesn't beat the naive baseline on Samsung Electronics — the write-up explains why that's the expected result in an efficient market.</p>
-        <div class="spacer"></div>
-        <div class="bars" aria-label="Accuracy: model 49.4%, always-up baseline 57.6%">
-          <div class="bar model"><span class="name">XGBoost</span><span class="track"><span class="fill" style="display:block;width:49.4%"></span></span><span class="val">49.4%</span></div>
-          <div class="bar"><span class="name" data-ko="항상 상승">Always up</span><span class="track"><span class="fill" style="display:block;width:57.6%"></span></span><span class="val">57.6%</span></div>
-        </div>
-        <ul class="tags"><li>XGBoost</li><li>yfinance</li><li>Plotly</li></ul>
-      </a>
 
       <a class="tile span-6" href="https://github.com/nopgae/nlp-text-embedding-comparison" target="_blank" rel="noreferrer">
         <span class="kicker" data-ko="멀티모달">Multimodal</span>
