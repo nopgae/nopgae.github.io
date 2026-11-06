@@ -442,14 +442,14 @@
   <section id="shipped" aria-labelledby="shipped-h">
     <div class="section-head"><h2 id="shipped-h" data-ko="자동화 · 클라우드">Automation &amp; cloud</h2><span class="idx">03</span></div>
     <div class="bento">
-      <a class="tile span-6" href="https://nopgae.github.io/starbucks-parking-finder/" target="_blank" rel="noreferrer">
-        <span class="kicker" data-ko="데이터 파이프라인 + API &lt;span class=&quot;live&quot;&gt;● 운영 중&lt;/span&gt;">Data pipeline + API <span class="live">● LIVE</span></span>
+      <a class="tile span-6" href="https://github.com/nopgae/starbucks-parking-finder" target="_blank" rel="noreferrer">
+        <span class="kicker" data-ko="데이터 파이프라인 + AI 스킬">Data pipeline + AI skill</span>
         <h3 data-ko="스타벅스 주차 검색 &lt;span class=&quot;arrow&quot;&gt;↗&lt;/span&gt;">Starbucks Parking Finder <span class="arrow">↗</span></h3>
-        <p data-ko="공식 매장 찾기는 주차 정보가 자유 텍스트라 &quot;2시간 이상 무료 주차&quot; 같은 조건으로 거를 수 없습니다. 매장 데이터를 수집해 주차 메모를 구조화하고, &lt;code&gt;강남역 근처 두시간 이상 무료 주차&lt;/code&gt; 같은 한국어 문장으로 검색하는 API와 지도를 만들었습니다.">The official store locator only has free-text parking notes, so you can't filter by "free parking for 2+ hours". I collected the store data, parsed the notes into structured fields, and built an API and map that take plain-Korean queries like <code>강남역 근처 두시간 이상 무료 주차</code>.</p>
-        <p class="pdr" data-ko="문제: 거를 수 없는 주차 메모 → Playwright로 요청 구조 분석 후 그 요청을 직접 호출해 수집, 주차·질의 파서(단위 테스트 11개, CI), Fastify + PostgreSQL API → 매장 2,131곳 수집, 1,514곳 주차 정보 구조화">Problem: unfilterable parking notes → found the store-locator request with Playwright and called it directly, parking and query parsers (11 unit tests, CI), Fastify + PostgreSQL API → 2,131 stores collected, 1,514 with structured parking info.</p>
+        <p data-ko="공식 매장 찾기는 주차 정보가 자유 텍스트라 &quot;2시간 이상 무료 주차&quot; 같은 조건으로 거를 수 없습니다. 전국 매장의 주차 안내를 모아 규칙 파서로 정리하고, Claude·ChatGPT 같은 AI가 매장별 안내 원문을 근거로 답하도록 지역별 데이터와 검색 스크립트를 스킬로 묶었습니다.">The official store locator only has free-text parking notes, so you can't filter by "free parking for 2+ hours". I collected every store's note, classified them with a rule-based parser, and packaged per-region data and a search script as a skill so AI assistants like Claude or ChatGPT answer from each store's original note.</p>
+        <p class="pdr" data-ko="문제: 거를 수 없는 주차 메모 → Playwright로 요청 구조 분석 후 그 요청을 직접 호출해 수집, 규칙 파서(표본 50개 기준 정확도 84%→94%, 단위 테스트 21개, CI), AI용 데이터·스킬 → 매장 2,212곳, 주차 안내 2,199곳">Problem: unfilterable parking notes → found the store-locator request with Playwright and called it directly, rule-based parser (84% → 94% on a 50-note sample, 21 unit tests, CI), AI-readable data and skill → 2,212 stores, 2,199 with a parking note.</p>
         <div class="spacer"></div>
-        <div class="big">2,131<small data-ko="매장 · 주차 정보 1,514곳">stores · 1,514 with parking</small></div>
-        <ul class="tags"><li>TypeScript</li><li>Playwright</li><li>Fastify</li><li>PostgreSQL</li><li>Render</li></ul>
+        <div class="big">2,212<small data-ko="매장 · 표본 정확도 94%">stores · 94% sample accuracy</small></div>
+        <ul class="tags"><li>TypeScript</li><li>Playwright</li><li>Python</li><li>GitHub Actions</li></ul>
       </a>
       <a class="tile span-3" href="https://price-tracker-theta-umber.vercel.app" target="_blank" rel="noreferrer">
         <span class="kicker" data-ko="웹 앱 &lt;span class=&quot;live&quot;&gt;● 운영 중&lt;/span&gt;">Web app <span class="live">● LIVE</span></span>
