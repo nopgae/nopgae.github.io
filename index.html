@@ -196,6 +196,11 @@
   .about p { color: var(--fg); font-size: 0.98rem; }
   .about p + p { margin-top: 0.75rem; }
   .about strong { color: var(--heading); font-weight: 600; }
+  .tile .shot { display: block; width: 100%; height: auto; border-radius: 10px; margin-top: 1rem; border: 1px solid #27272a; }
+  @media (min-width: 900px) {
+    .tile.with-shot { display: grid; grid-template-columns: 1fr 1.15fr; gap: 1.75rem; align-items: center; }
+    .tile.with-shot .shot { margin-top: 0; }
+  }
   .stack { display: grid; gap: 0.9rem; margin: 0.75rem 0 0; }
   .stack dt { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
   .stack dd { margin: 0.15rem 0 0; color: var(--fg); font-size: 0.9rem; }
@@ -450,6 +455,17 @@
         <div class="big">2,212<small data-ko="매장 · 표본 정확도 92% (AI 라벨)">stores · 92% sample accuracy (AI-labeled)</small></div>
         <ul class="tags"><li>TypeScript</li><li>Playwright</li><li>Python</li><li>GitHub Actions</li></ul>
       </a>
+      <a class="tile span-6 with-shot" href="https://github.com/nopgae/lyrics-overlay" target="_blank" rel="noreferrer">
+        <div>
+        <span class="kicker" data-ko="macOS 앱">macOS app</span>
+        <h3>Lyrics Overlay <span class="arrow">↗</span></h3>
+        <p data-ko="지금 재생 중인 곡의 싱크 가사를 메뉴바, 노래방 패널, 전체 가사 창, 노치 아래에 띄우는 네이티브 macOS 앱입니다. Apple Music, Spotify, YouTube Music(웹·앱), 로컬 파일을 지원합니다.">A native macOS app that shows time-synced lyrics for whatever is playing in the menu bar, a karaoke panel, a full-lyrics window, or under the notch. Works with Apple Music, Spotify, YouTube Music (web and app) and local files.</p>
+        <p class="pdr" data-ko="문제: 작업 중에 싱크 가사를 볼 방법이 없음 → 플레이어별로 재생 정보를 읽고(AppleScript, 브라우저 JS, 시스템 Now Playing), LRCLIB·NetEase 가사를 곡 길이로 검증해 캐시 → 파싱·싱크 핵심 로직 단위 테스트(swift test)">Problem: no synced lyrics while working → Read playback per player (AppleScript, browser JS, system Now Playing), fetch LRCLIB/NetEase lyrics validated by track length and cached → Unit-tested parsing and sync core (swift test).</p>
+        
+        <ul class="tags"><li>Swift</li><li>SwiftUI</li><li>AppKit</li></ul>
+        </div>
+        <img class="shot" src="img/lyrics-overlay.jpg" width="1000" height="636" loading="lazy" alt="Lyrics Overlay full-lyrics window with synced lines">
+      </a>
       <a class="tile span-3" href="https://price-tracker-theta-umber.vercel.app" target="_blank" rel="noreferrer">
         <span class="kicker" data-ko="웹 앱 &lt;span class=&quot;live&quot;&gt;● 운영 중&lt;/span&gt;">Web app <span class="live">● LIVE</span></span>
         <h3>Price Tracker <span class="arrow">↗</span></h3>
@@ -464,14 +480,7 @@
         <p class="pdr" data-ko="문제: 공공 카메라 영상이 여러 곳에 흩어져 있음 → ITS 교통 CCTV API와 공개 웹캠을 지도 하나로 합치고 서버에서 이미지 프록시 → 마커를 클릭하면 바로 시청">Problem: public camera feeds are scattered → Merged ITS traffic CCTV API and public webcams on one map, with a server-side image proxy → Click a marker to watch the feed.</p>
         <ul class="tags"><li data-ko="공공데이터 API">Public data APIs</li><li data-ko="지도">Maps</li></ul>
       </a>
-      <a class="tile span-3" href="https://github.com/nopgae/lyrics-overlay" target="_blank" rel="noreferrer">
-        <span class="kicker">macOS</span>
-        <h3>Lyrics Overlay <span class="arrow">↗</span></h3>
-        <p data-ko="MP3와 YouTube Music 재생에 맞춰 화면 위에 가사를 띄우는 데스크톱 오버레이입니다. LRC / LRCLIB을 지원합니다.">Always-on-top desktop lyrics overlay synced to MP3 playback and YouTube Music, with LRC / LRCLIB support.</p>
-        <p class="pdr" data-ko="문제: 작업 중에 싱크 가사를 볼 방법이 없음 → 곡 길이로 가사를 검증하고 캐시하는 메뉴바 앱 → 싱크 로직 단위 테스트(swift test)">Problem: no synced lyrics while working → Native menu-bar app that matches lyrics by track length and caches them → Unit-tested sync core (swift test).</p>
-        <ul class="tags"><li>Swift</li><li>SwiftUI</li></ul>
-      </a>
-      <a class="tile span-3" href="https://github.com/nopgae/solve-log" target="_blank" rel="noreferrer">
+      <a class="tile span-6" href="https://github.com/nopgae/solve-log" target="_blank" rel="noreferrer">
         <span class="kicker" data-ko="자동화">Automation</span>
         <h3>solve-log <span class="arrow">↗</span></h3>
         <p data-ko="백준과 webhacking.kr 풀이를 자동으로 기록해 GitHub에 올리는 CLI입니다.">CLI that automatically logs and pushes Baekjoon and webhacking.kr solutions to GitHub.</p>
